@@ -8,7 +8,7 @@
 using namespace std;
 
 int main()
-{
+{   char buffer[1024];
     int net_socket;
     net_socket = socket(AF_INET,SOCK_STREAM,0);
     struct sockaddr_in addr;
@@ -27,6 +27,11 @@ int main()
     }
     cout<<"Valid address"<<endl;
 
-    int connect(int net_socket,)
-    
+    if (connect(net_socket, (struct sockaddr *) &addr, sizeof(addr))<0)
+    {
+        cout<<"Connection failed"<<endl;
+        return -1;
+    }
+    cin.getline(buffer,1024);
+    send(net_socket,buffer,1024,0);
 }
