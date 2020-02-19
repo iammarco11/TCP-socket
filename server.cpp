@@ -31,15 +31,18 @@ int main()
         exit(1);
     }
     cout<<"Socket created successfully"<<endl;
-    if ((bind_var = bind(server,(struct sockaddr*)&addr,addrlen))<0) 
+    bind_var = bind(net_socket,(struct sockaddr*)&addr,addrlen);
+    if (bind_var<0) 
     {
-        cout<<"Bind failed"<<endl;
+        perror("bind failed. Error");
+        exit(1);
     }
     cout<<"Bind Successful"<<endl;
 
-    if (listen(server,3)<0)
+    if (listen(net_socket,3)<0)
     {
-        cout<<"server can't listen to the socket"<<endl;
+        perror("listening failed. Error");
+        exit(1);
     }
     cout<<"listening"<<endl;
     if ((new_socket = accept(server,(struct sockaddr*)&addr,(socklen_t*)&addrlen))<0)
