@@ -45,9 +45,11 @@ int main()
         exit(1);
     }
     cout<<"listening"<<endl;
-    if ((new_socket = accept(server,(struct sockaddr*)&addr,(socklen_t*)&addrlen))<0)
+    new_socket = accept(net_socket,(struct sockaddr*)&addr,(socklen_t*)&addrlen);
+    if (new_socket<0)
     {
-         cout<<"Server not accepting the incoming calls"<<endl;
+         perror("Accept");
+         exit(1);
     }
     cin.getline(buffer,1024);
     send(net_socket,buffer,1024,0);
